@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Angels_Flying_Through_Hell_2020.ogg-a121018770e98f51c7de00b29cc5b416.oggstr"
+
+[deps]
+
+source_file="res://Asset/Angels_Flying_Through_Hell_2020.ogg"
+dest_files=[ "res://.import/Angels_Flying_Through_Hell_2020.ogg-a121018770e98f51c7de00b29cc5b416.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

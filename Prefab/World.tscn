@@ -1,0 +1,336 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://Prefab/Grid.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Script/World.gd" type="Script" id=2]
+[ext_resource path="res://Script/Grid.gd" type="Script" id=3]
+[ext_resource path="res://Prefab/SwipeDetector.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Asset/Roboto-Regular.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://Asset/home.png" type="Texture" id=6]
+[ext_resource path="res://Asset/right.png" type="Texture" id=7]
+[ext_resource path="res://Asset/pause.png" type="Texture" id=8]
+[ext_resource path="res://Asset/audioOn.png" type="Texture" id=9]
+[ext_resource path="res://Asset/audioOff.png" type="Texture" id=10]
+[ext_resource path="res://Asset/information.png" type="Texture" id=11]
+[ext_resource path="res://Script/Timer.gd" type="Script" id=12]
+[ext_resource path="res://Asset/Angels_Flying_Through_Hell_2020.ogg" type="AudioStream" id=13]
+[ext_resource path="res://Asset/grey_panel.png" type="Texture" id=14]
+
+[sub_resource type="DynamicFont" id=1]
+size = 144
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+font_data = ExtResource( 5 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "flash"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0.12, 0.56, 1, 1 ), Color( 0.59375, 0.796875, 1, 1 ), Color( 0.12, 0.56, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.25, 1.25 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="DynamicFont" id=3]
+size = 108
+outline_size = 4
+outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+extra_spacing_space = 12
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 32
+outline_size = 4
+outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+extra_spacing_space = 12
+font_data = ExtResource( 5 )
+
+[node name="World" type="Node"]
+script = ExtResource( 2 )
+
+[node name="SwipeDetector" parent="." instance=ExtResource( 4 )]
+MAX_DIAGONAL_SLOPE = 1.25
+
+[node name="Bg" type="ColorRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -360.0
+margin_top = -640.0
+margin_right = 360.0
+margin_bottom = 640.0
+color = Color( 0.890196, 0.862745, 0.54902, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_right = 740.0
+margin_bottom = 276.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Timer" type="Label" parent="VBoxContainer/HBoxContainer"]
+margin_right = 324.0
+margin_bottom = 276.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "2048"
+align = 1
+valign = 1
+script = ExtResource( 12 )
+
+[node name="Timer" type="Timer" parent="VBoxContainer/HBoxContainer/Timer"]
+wait_time = 10.0
+autostart = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+margin_left = 328.0
+margin_right = 740.0
+margin_bottom = 276.0
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+modulate = Color( 0.054902, 0.0196078, 0.0196078, 0 )
+margin_right = 412.0
+margin_bottom = 172.0
+size_flags_vertical = 3
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 176.0
+margin_right = 412.0
+margin_bottom = 276.0
+rect_min_size = Vector2( 412, 100 )
+mouse_filter = 1
+size_flags_horizontal = 3
+size_flags_vertical = 0
+color = Color( 0.121569, 0.188235, 0.109804, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/VBoxContainer/ColorRect"]
+self_modulate = Color( 0.34902, 0.533333, 0.317647, 1 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -196.0
+margin_top = -40.0
+margin_right = 196.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 80 )
+texture = ExtResource( 14 )
+expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/ColorRect/TextureRect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -206.0
+margin_top = -40.0
+margin_right = 206.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 80 )
+size_flags_horizontal = 3
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InfoBtn" type="TextureButton" parent="VBoxContainer/HBoxContainer/VBoxContainer/ColorRect/TextureRect/HBoxContainer"]
+pause_mode = 2
+margin_left = 40.0
+margin_right = 120.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 80, 80 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture_normal = ExtResource( 11 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioBtn" type="TextureButton" parent="VBoxContainer/HBoxContainer/VBoxContainer/ColorRect/TextureRect/HBoxContainer"]
+pause_mode = 2
+margin_left = 124.0
+margin_right = 204.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 80, 80 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+toggle_mode = true
+texture_normal = ExtResource( 9 )
+texture_pressed = ExtResource( 10 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="VBoxContainer/HBoxContainer/VBoxContainer/ColorRect/TextureRect/HBoxContainer/AudioBtn"]
+stream = ExtResource( 13 )
+
+[node name="PauseBtn" type="TextureButton" parent="VBoxContainer/HBoxContainer/VBoxContainer/ColorRect/TextureRect/HBoxContainer"]
+pause_mode = 2
+margin_left = 208.0
+margin_right = 288.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 80, 80 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+toggle_mode = true
+texture_normal = ExtResource( 8 )
+texture_pressed = ExtResource( 7 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RestartBtn" type="TextureButton" parent="VBoxContainer/HBoxContainer/VBoxContainer/ColorRect/TextureRect/HBoxContainer"]
+pause_mode = 2
+self_modulate = Color( 0.12, 0.56, 1, 1 )
+margin_left = 292.0
+margin_right = 372.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 80, 80 )
+rect_pivot_offset = Vector2( 50, 50 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture_normal = ExtResource( 6 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="VBoxContainer/HBoxContainer/VBoxContainer/ColorRect/TextureRect/HBoxContainer/RestartBtn"]
+anims/flash = SubResource( 2 )
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
+margin_top = 280.0
+margin_right = 740.0
+margin_bottom = 1000.0
+rect_min_size = Vector2( 720, 720 )
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer/CenterContainer"]
+self_modulate = Color( 0.121569, 0.188235, 0.109804, 1 )
+margin_left = 20.0
+margin_top = 10.0
+margin_right = 720.0
+margin_bottom = 710.0
+rect_min_size = Vector2( 700, 700 )
+
+[node name="Grid" parent="VBoxContainer/CenterContainer/ColorRect" instance=ExtResource( 1 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -335.0
+margin_top = -335.0
+margin_right = 335.0
+margin_bottom = 335.0
+script = ExtResource( 3 )
+
+[node name="Overlay" type="ColorRect" parent="VBoxContainer/CenterContainer"]
+visible = false
+margin_left = 20.0
+margin_top = 10.0
+margin_right = 720.0
+margin_bottom = 710.0
+rect_min_size = Vector2( 700, 700 )
+color = Color( 0.0392157, 0.0392157, 0.0392157, 0.752941 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="VBoxContainer/CenterContainer/Overlay"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0.7, 0.13, 0.13, 1 )
+text = "Game Over"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InfoLabel" type="Label" parent="VBoxContainer/CenterContainer/Overlay"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 0, 0.98, 0.6, 1 )
+text = "HOW TO PLAY: 
+
+
+Swipe the screen to move the tiles across the board.
+
+When two tiles with the same number touch, they merge into one.
+
+When one set of tiles reaches 2048 you win the game!"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
+margin_top = 1004.0
+margin_right = 740.0
+margin_bottom = 1280.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="swiped" from="SwipeDetector" to="." method="_on_SwipeDetector_swiped"]
+[connection signal="timeout" from="VBoxContainer/HBoxContainer/Timer/Timer" to="." method="_on_Timer_timeout"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/ColorRect/TextureRect/HBoxContainer/InfoBtn" to="." method="_on_InfoBtn_pressed"]
+[connection signal="toggled" from="VBoxContainer/HBoxContainer/VBoxContainer/ColorRect/TextureRect/HBoxContainer/AudioBtn" to="." method="_on_AudioBtn_toggled"]
+[connection signal="toggled" from="VBoxContainer/HBoxContainer/VBoxContainer/ColorRect/TextureRect/HBoxContainer/PauseBtn" to="." method="_on_PauseBtn_toggled"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/ColorRect/TextureRect/HBoxContainer/RestartBtn" to="." method="_on_RestartBtn_pressed"]
