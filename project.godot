@@ -26,9 +26,13 @@ Global2048="*res://Script/global-2048.gd"
 
 [display]
 
-window/size/width=720
-window/size/height=1280
+window/size/width=1080
+window/size/height=1920
+window/size/test_width=1080
+window/size/test_height=1920
 window/handheld/orientation="portrait"
+window/stretch/mode="2d"
+window/stretch/aspect="keep_width"
 
 [input_devices]
 

@@ -1,88 +1,96 @@
 extends Node
 
+onready var Clock = $MarginContainer/VBoxContainer/HBoxContainer/Clock
+onready var Overlay = $MarginContainer/VBoxContainer/CenterContainer/Overlay
+onready var Grid = $MarginContainer/VBoxContainer/CenterContainer/ColorRect/MarginContainer/Grid
+onready var RestartBtn = $MarginContainer/VBoxContainer/HBoxContainer/Buttons/ColorRect/TextureRect/VBoxContainer/RestartBtn
+onready var AudioBtn = $MarginContainer/VBoxContainer/HBoxContainer/Buttons/ColorRect/TextureRect/VBoxContainer/AudioBtn
+onready var PauseBtn = $MarginContainer/VBoxContainer/HBoxContainer/Buttons/ColorRect/TextureRect/VBoxContainer/PauseBtn
+onready var InfoBtn = $MarginContainer/VBoxContainer/HBoxContainer/Buttons/ColorRect/TextureRect/VBoxContainer/InfoBtn
+
 func _ready():
-	$VBoxContainer/HBoxContainer/VBoxContainer/ColorRect/TextureRect/HBoxContainer/RestartBtn.self_modulate = ColorN("dodgerblue")
-	$VBoxContainer/HBoxContainer/VBoxContainer/ColorRect/TextureRect/HBoxContainer/AudioBtn.self_modulate = ColorN("darkgoldenrod")
-	$VBoxContainer/HBoxContainer/VBoxContainer/ColorRect/TextureRect/HBoxContainer/PauseBtn.self_modulate = ColorN("firebrick")
-	$VBoxContainer/HBoxContainer/VBoxContainer/ColorRect/TextureRect/HBoxContainer/InfoBtn.self_modulate = ColorN("mediumspringgreen")
+	RestartBtn.self_modulate = ColorN("dodgerblue")
+	AudioBtn.self_modulate = ColorN("darkgoldenrod")
+	PauseBtn.self_modulate = ColorN("firebrick")
+	InfoBtn.self_modulate = ColorN("mediumspringgreen")
 	
-	$VBoxContainer/HBoxContainer/VBoxContainer/ColorRect/TextureRect/HBoxContainer/AudioBtn/AudioStreamPlayer.play(21)
+	AudioBtn.get_node("AudioStreamPlayer").play(21)
 	
-# warning-ignore:return_value_discarded
-	Global.connect("GameOver", self, "_on_GameOver")
-	Global.connect("TileMatch", self, "_on_TileMatch")
+	var err: int = 0 
+	err = Global.connect("GameOver", self, "_on_GameOver")
+	if err:
+		printerr("Error occured with: " + name + ". Error Code: " + String(err))
+	err = Global.connect("TileMatch", self, "_on_TileMatch")
+	if err:
+		printerr("Error occured with: " + name + ". Error Code: " + String(err))
 	
 	
 func _on_SwipeDetector_swiped(direction):
 	
-	$VBoxContainer/CenterContainer/ColorRect/Grid.Move(direction)
+	Grid.Move(direction)
 	
 	if Global.moved:
-		$VBoxContainer/CenterContainer/ColorRect/Grid.Add_Tile()
+		Grid.Add_Tile()
 	
-	$VBoxContainer/CenterContainer/ColorRect/Grid.Draw_Board()
+	Grid.Draw_Board()
 	
 	if Global.done:
-		$VBoxContainer/CenterContainer/Overlay.show()
-		$VBoxContainer/CenterContainer/Overlay/Label.show()
-		$VBoxContainer/CenterContainer/Overlay/InfoLabel.hide()
-		$VBoxContainer/HBoxContainer/VBoxContainer/ColorRect/TextureRect/HBoxContainer/RestartBtn/AnimationPlayer.play("flash")
+		Overlay.show()
+		Overlay.get_node("Label").show()
+		Overlay.get_node("InfoLabel").hide()
+		RestartBtn.get_node("AnimationPlayer").play("flash")
 
 func _on_RestartBtn_pressed():
 # warning-ignore:return_value_discarded
 	get_tree().reload_current_scene()
 
 func _on_AudioBtn_toggled(button_pressed):
+	var AudioStrPlyr = AudioBtn.get_node("AudioStreamPlayer")
 	if button_pressed:
-		$VBoxContainer/HBoxContainer/VBoxContainer/ColorRect/TextureRect/HBoxContainer/AudioBtn.self_modulate = ColorN("darkmagenta")
-		$VBoxContainer/HBoxContainer/VBoxContainer/ColorRect/TextureRect/HBoxContainer/AudioBtn/AudioStreamPlayer.stop()
+		AudioBtn.self_modulate = ColorN("darkmagenta")
+		AudioStrPlyr.stop()
 	else:
-		$VBoxContainer/HBoxContainer/VBoxContainer/ColorRect/TextureRect/HBoxContainer/AudioBtn.self_modulate = ColorN("darkgoldenrod")
-		$VBoxContainer/HBoxContainer/VBoxContainer/ColorRect/TextureRect/HBoxContainer/AudioBtn/AudioStreamPlayer.play($VBoxContainer/HBoxContainer/VBoxContainer/ColorRect/TextureRect/HBoxContainer/AudioBtn/AudioStreamPlayer.get_playback_position())
+		AudioBtn.self_modulate = ColorN("darkgoldenrod")
+		AudioStrPlyr.play(AudioStrPlyr.get_playback_position())
 
 
 func _on_PauseBtn_toggled(button_pressed):
 	if not Global.done:
 		if button_pressed:
-			$VBoxContainer/HBoxContainer/VBoxContainer/ColorRect/TextureRect/HBoxContainer/PauseBtn.self_modulate = ColorN("forestgreen")
-			$VBoxContainer/CenterContainer/Overlay.show()
-			$VBoxContainer/CenterContainer/Overlay/Label.hide()
-			$VBoxContainer/CenterContainer/Overlay/InfoLabel.hide()
+			PauseBtn.self_modulate = ColorN("forestgreen")
+			Overlay.show()
+			Overlay.get_node("Label").hide()
+			Overlay.get_node("InfoLabel").hide()
 			get_tree().paused = true
 		else:
-			$VBoxContainer/HBoxContainer/VBoxContainer/ColorRect/TextureRect/HBoxContainer/PauseBtn.self_modulate = ColorN("firebrick")
-			$VBoxContainer/CenterContainer/Overlay.hide()
+			PauseBtn.self_modulate = ColorN("firebrick")
+			Overlay.hide()
 			get_tree().paused = false
 
 
 func _on_InfoBtn_pressed():
-	$VBoxContainer/HBoxContainer/VBoxContainer/ColorRect/TextureRect/HBoxContainer/PauseBtn.pressed = true
+	PauseBtn.pressed = true
 	_on_PauseBtn_toggled(true)
-	$VBoxContainer/CenterContainer/Overlay/Label.hide()
-	$VBoxContainer/CenterContainer/Overlay/InfoLabel.show()
+	Overlay.get_node("Label").hide()
+	Overlay.get_node("InfoLabel").show()
 
 
 func _on_GameOver():
-	$VBoxContainer/HBoxContainer/VBoxContainer/ColorRect/TextureRect/HBoxContainer/InfoBtn.disabled = true
-	$VBoxContainer/HBoxContainer/VBoxContainer/ColorRect/TextureRect/HBoxContainer/PauseBtn.disabled = true
-	$VBoxContainer/HBoxContainer/VBoxContainer2/Clock.Stop()
-	$VBoxContainer/CenterContainer/Overlay.show()
+	InfoBtn.disabled = true
+	PauseBtn.disabled = true
+	Clock.Stop()
+	Overlay.show()
 	
 	if Global.win:
-		$VBoxContainer/CenterContainer/Overlay/Label.text = "You Win!"
-		$VBoxContainer/CenterContainer/Overlay/Label.set("custom_colors/font_color",ColorN("green"))
+		Overlay.get_node("Label").text = "You Win!"
+		Overlay.get_node("Label").set("custom_colors/font_color",ColorN("green"))
 	else:
-		$VBoxContainer/CenterContainer/Overlay/Label.text = "Game Over"
-		$VBoxContainer/CenterContainer/Overlay/Label.set("custom_colors/font_color",ColorN("red"))
+		Overlay.get_node("Label").text = "Game Over"
+		Overlay.get_node("Label").set("custom_colors/font_color",ColorN("red"))
 	
-	$VBoxContainer/CenterContainer/Overlay/Label.show()
-	$VBoxContainer/CenterContainer/Overlay/InfoLabel.hide()
-	$VBoxContainer/HBoxContainer/VBoxContainer/ColorRect/TextureRect/HBoxContainer/RestartBtn/AnimationPlayer.play("flash")
+	Overlay.get_node("Label").show()
+	Overlay.get_node("InfoLabel").hide()
+	RestartBtn.get_node("AnimationPlayer").play("flash")
 
-
-func _on_Timer_timeout():
-	$VBoxContainer/HBoxContainer/Timer/Timer.stop()
-	Global.emit_signal("GameOver")
-	
 func _on_TileMatch(amount:float):
-	$VBoxContainer/HBoxContainer/VBoxContainer2/Clock.Add_Time(amount)
+	Clock.Add_Time(amount)

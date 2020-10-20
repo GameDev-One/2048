@@ -7,6 +7,8 @@ self_modulate = Color( 0, 0, 0, 1 )
 margin_right = 670.0
 margin_bottom = 670.0
 rect_min_size = Vector2( 650, 650 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 custom_constants/vseparation = 10
 custom_constants/hseparation = 10
 columns = 4
@@ -16,26 +18,36 @@ __meta__ = {
 
 [node name="Tile" parent="." instance=ExtResource( 1 )]
 rect_scale = Vector2( 1, 1 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="Tile2" parent="." instance=ExtResource( 1 )]
 margin_left = 170.0
 margin_right = 330.0
 rect_scale = Vector2( 1, 1 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="Tile3" parent="." instance=ExtResource( 1 )]
 margin_left = 340.0
 margin_right = 500.0
 rect_scale = Vector2( 1, 1 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="Tile4" parent="." instance=ExtResource( 1 )]
 margin_left = 510.0
 margin_right = 670.0
 rect_scale = Vector2( 1, 1 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="Tile5" parent="." instance=ExtResource( 1 )]
 margin_top = 170.0
 margin_bottom = 330.0
 rect_scale = Vector2( 1, 1 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="Tile6" parent="." instance=ExtResource( 1 )]
 margin_left = 170.0
@@ -43,6 +55,8 @@ margin_top = 170.0
 margin_right = 330.0
 margin_bottom = 330.0
 rect_scale = Vector2( 1, 1 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="Tile7" parent="." instance=ExtResource( 1 )]
 margin_left = 340.0
@@ -50,6 +64,8 @@ margin_top = 170.0
 margin_right = 500.0
 margin_bottom = 330.0
 rect_scale = Vector2( 1, 1 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="Tile8" parent="." instance=ExtResource( 1 )]
 margin_left = 510.0
@@ -57,11 +73,15 @@ margin_top = 170.0
 margin_right = 670.0
 margin_bottom = 330.0
 rect_scale = Vector2( 1, 1 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="Tile9" parent="." instance=ExtResource( 1 )]
 margin_top = 340.0
 margin_bottom = 500.0
 rect_scale = Vector2( 1, 1 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="Tile10" parent="." instance=ExtResource( 1 )]
 margin_left = 170.0
@@ -69,6 +89,8 @@ margin_top = 340.0
 margin_right = 330.0
 margin_bottom = 500.0
 rect_scale = Vector2( 1, 1 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="Tile11" parent="." instance=ExtResource( 1 )]
 margin_left = 340.0
@@ -76,6 +98,8 @@ margin_top = 340.0
 margin_right = 500.0
 margin_bottom = 500.0
 rect_scale = Vector2( 1, 1 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="Tile12" parent="." instance=ExtResource( 1 )]
 margin_left = 510.0
@@ -83,11 +107,15 @@ margin_top = 340.0
 margin_right = 670.0
 margin_bottom = 500.0
 rect_scale = Vector2( 1, 1 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="Tile13" parent="." instance=ExtResource( 1 )]
 margin_top = 510.0
 margin_bottom = 670.0
 rect_scale = Vector2( 1, 1 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="Tile14" parent="." instance=ExtResource( 1 )]
 margin_left = 170.0
@@ -95,6 +123,8 @@ margin_top = 510.0
 margin_right = 330.0
 margin_bottom = 670.0
 rect_scale = Vector2( 1, 1 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="Tile15" parent="." instance=ExtResource( 1 )]
 margin_left = 340.0
@@ -102,6 +132,8 @@ margin_top = 510.0
 margin_right = 500.0
 margin_bottom = 670.0
 rect_scale = Vector2( 1, 1 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="Tile16" parent="." instance=ExtResource( 1 )]
 margin_left = 510.0
@@ -109,3 +141,5 @@ margin_top = 510.0
 margin_right = 670.0
 margin_bottom = 670.0
 rect_scale = Vector2( 1, 1 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
