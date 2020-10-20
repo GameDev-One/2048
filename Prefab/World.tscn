@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Prefab/Grid.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Script/World.gd" type="Script" id=2]
@@ -11,16 +11,9 @@
 [ext_resource path="res://Asset/audioOn.png" type="Texture" id=9]
 [ext_resource path="res://Asset/audioOff.png" type="Texture" id=10]
 [ext_resource path="res://Asset/information.png" type="Texture" id=11]
-[ext_resource path="res://Script/Timer.gd" type="Script" id=12]
 [ext_resource path="res://Asset/Angels_Flying_Through_Hell_2020.ogg" type="AudioStream" id=13]
 [ext_resource path="res://Asset/grey_panel.png" type="Texture" id=14]
-
-[sub_resource type="DynamicFont" id=1]
-size = 144
-outline_size = 2
-outline_color = Color( 0, 0, 0, 1 )
-use_mipmaps = true
-font_data = ExtResource( 5 )
+[ext_resource path="res://Prefab/Clock.tscn" type="PackedScene" id=15]
 
 [sub_resource type="Animation" id=2]
 resource_name = "flash"
@@ -96,43 +89,42 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_right = 740.0
-margin_bottom = 276.0
+margin_right = 720.0
+margin_bottom = 374.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-alignment = 1
 
-[node name="Timer" type="Label" parent="VBoxContainer/HBoxContainer"]
-margin_right = 324.0
-margin_bottom = 276.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_fonts/font = SubResource( 1 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "2048"
-align = 1
-valign = 1
-script = ExtResource( 12 )
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+margin_right = 250.0
+margin_bottom = 374.0
 
-[node name="Timer" type="Timer" parent="VBoxContainer/HBoxContainer/Timer"]
-wait_time = 10.0
-autostart = true
+[node name="Panel" type="Panel" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+modulate = Color( 1, 1, 1, 0 )
+margin_right = 250.0
+margin_bottom = 120.0
+rect_min_size = Vector2( 250, 120 )
+
+[node name="Clock" parent="VBoxContainer/HBoxContainer/VBoxContainer2" instance=ExtResource( 15 )]
+margin_top = 124.0
+margin_bottom = 374.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
-margin_left = 328.0
-margin_right = 740.0
-margin_bottom = 276.0
+anchor_left = 0.00138889
+anchor_right = 0.00138889
+margin_left = 254.0
+margin_right = 666.0
+margin_bottom = 374.0
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 modulate = Color( 0.054902, 0.0196078, 0.0196078, 0 )
 margin_right = 412.0
-margin_bottom = 172.0
+margin_bottom = 270.0
 size_flags_vertical = 3
 
 [node name="ColorRect" type="ColorRect" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_top = 176.0
+margin_top = 274.0
 margin_right = 412.0
-margin_bottom = 276.0
+margin_bottom = 374.0
 rect_min_size = Vector2( 412, 100 )
 mouse_filter = 1
 size_flags_horizontal = 3
@@ -245,16 +237,16 @@ __meta__ = {
 anims/flash = SubResource( 2 )
 
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
-margin_top = 280.0
-margin_right = 740.0
-margin_bottom = 1000.0
+margin_top = 378.0
+margin_right = 720.0
+margin_bottom = 1098.0
 rect_min_size = Vector2( 720, 720 )
 
 [node name="ColorRect" type="ColorRect" parent="VBoxContainer/CenterContainer"]
 self_modulate = Color( 0.121569, 0.188235, 0.109804, 1 )
-margin_left = 20.0
+margin_left = 10.0
 margin_top = 10.0
-margin_right = 720.0
+margin_right = 710.0
 margin_bottom = 710.0
 rect_min_size = Vector2( 700, 700 )
 
@@ -271,9 +263,9 @@ script = ExtResource( 3 )
 
 [node name="Overlay" type="ColorRect" parent="VBoxContainer/CenterContainer"]
 visible = false
-margin_left = 20.0
+margin_left = 10.0
 margin_top = 10.0
-margin_right = 720.0
+margin_right = 710.0
 margin_bottom = 710.0
 rect_min_size = Vector2( 700, 700 )
 color = Color( 0.0392157, 0.0392157, 0.0392157, 0.752941 )
@@ -317,8 +309,8 @@ __meta__ = {
 }
 
 [node name="Label2" type="Label" parent="VBoxContainer"]
-margin_top = 1004.0
-margin_right = 740.0
+margin_top = 1102.0
+margin_right = 720.0
 margin_bottom = 1280.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -329,7 +321,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 [connection signal="swiped" from="SwipeDetector" to="." method="_on_SwipeDetector_swiped"]
-[connection signal="timeout" from="VBoxContainer/HBoxContainer/Timer/Timer" to="." method="_on_Timer_timeout"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/ColorRect/TextureRect/HBoxContainer/InfoBtn" to="." method="_on_InfoBtn_pressed"]
 [connection signal="toggled" from="VBoxContainer/HBoxContainer/VBoxContainer/ColorRect/TextureRect/HBoxContainer/AudioBtn" to="." method="_on_AudioBtn_toggled"]
 [connection signal="toggled" from="VBoxContainer/HBoxContainer/VBoxContainer/ColorRect/TextureRect/HBoxContainer/PauseBtn" to="." method="_on_PauseBtn_toggled"]

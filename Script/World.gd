@@ -65,6 +65,7 @@ func _on_InfoBtn_pressed():
 func _on_GameOver():
 	$VBoxContainer/HBoxContainer/VBoxContainer/ColorRect/TextureRect/HBoxContainer/InfoBtn.disabled = true
 	$VBoxContainer/HBoxContainer/VBoxContainer/ColorRect/TextureRect/HBoxContainer/PauseBtn.disabled = true
+	$VBoxContainer/HBoxContainer/VBoxContainer2/Clock.Stop()
 	$VBoxContainer/CenterContainer/Overlay.show()
 	
 	if Global.win:
@@ -84,4 +85,4 @@ func _on_Timer_timeout():
 	Global.emit_signal("GameOver")
 	
 func _on_TileMatch(amount:float):
-	$VBoxContainer/HBoxContainer/Timer.Add_Time(amount)
+	$VBoxContainer/HBoxContainer/VBoxContainer2/Clock.Add_Time(amount)

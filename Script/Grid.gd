@@ -108,7 +108,7 @@ func Move_Vert(_x:int, _y:int, _direction:int):
 				
 			new_tile.blocked = true
 			new_tile.shrink()
-			Global.emit_signal("TileMatch", new_tile.value / 2)
+			Global.emit_signal("TileMatch", new_tile.value / 20.0)
 			Global.moved = true
 			
 	elif not new_tile.value and old_tile.value:
@@ -136,7 +136,7 @@ func Move_Hori(_x:int, _y:int, _direction:int):
 				
 			new_tile.blocked = true
 			new_tile.shrink()
-			Global.emit_signal("TileMatch", new_tile.value / 2)
+			Global.emit_signal("TileMatch", new_tile.value / 20.0)
 			Global.moved = true
 	elif not new_tile.value and old_tile.value:
 			new_tile.value = old_tile.value
