@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Prefab/Grid.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Script/World.gd" type="Script" id=2]
@@ -11,11 +11,13 @@
 [ext_resource path="res://Asset/audioOn.png" type="Texture" id=9]
 [ext_resource path="res://Asset/audioOff.png" type="Texture" id=10]
 [ext_resource path="res://Asset/information.png" type="Texture" id=11]
+[ext_resource path="res://admob.gd" type="Script" id=12]
 [ext_resource path="res://Asset/Angels_Flying_Through_Hell_2020.ogg" type="AudioStream" id=13]
 [ext_resource path="res://Asset/grey_panel.png" type="Texture" id=14]
 [ext_resource path="res://Prefab/Clock.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Script/Ads.gd" type="Script" id=16]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=1]
 resource_name = "flash"
 loop = true
 tracks/0/type = "value"
@@ -43,7 +45,7 @@ tracks/1/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1.25, 1.25 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 size = 108
 outline_size = 4
 outline_color = Color( 0, 0, 0, 1 )
@@ -51,7 +53,7 @@ use_mipmaps = true
 extra_spacing_space = 12
 font_data = ExtResource( 5 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=3]
 size = 32
 outline_size = 4
 outline_color = Color( 0, 0, 0, 1 )
@@ -224,7 +226,7 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MarginContainer/VBoxContainer/HBoxContainer/Buttons/ColorRect/TextureRect/VBoxContainer/RestartBtn"]
-anims/flash = SubResource( 2 )
+anims/flash = SubResource( 1 )
 
 [node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer"]
 margin_top = 504.0
@@ -258,10 +260,8 @@ script = ExtResource( 3 )
 
 [node name="Overlay" type="ColorRect" parent="MarginContainer/VBoxContainer/CenterContainer"]
 visible = false
-margin_left = 27.0
-margin_top = 27.0
-margin_right = 1041.0
-margin_bottom = 1041.0
+margin_right = 1014.0
+margin_bottom = 1014.0
 rect_min_size = Vector2( 1014, 1014 )
 color = Color( 0.0392157, 0.0392157, 0.0392157, 0.752941 )
 __meta__ = {
@@ -272,7 +272,7 @@ __meta__ = {
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.7, 0.13, 0.13, 1 )
 text = "Game Over"
 align = 1
@@ -286,7 +286,7 @@ __meta__ = {
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0, 0.98, 0.6, 1 )
 text = "HOW TO PLAY: 
 
@@ -303,20 +303,66 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="Ads" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 margin_top = 1522.0
 margin_right = 1014.0
 margin_bottom = 1840.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource( 16 )
+
+[node name="DebugOut" type="RichTextLabel" parent="MarginContainer/VBoxContainer/Ads"]
+margin_right = 250.0
+margin_bottom = 318.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+
+[node name="Reload" type="Button" parent="MarginContainer/VBoxContainer/Ads"]
+margin_left = 254.0
+margin_right = 504.0
+margin_bottom = 318.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Reload"
+
+[node name="Banner" type="Button" parent="MarginContainer/VBoxContainer/Ads"]
+margin_left = 508.0
+margin_right = 758.0
+margin_bottom = 318.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+toggle_mode = true
+text = "Banner"
+expand_icon = true
+
+[node name="Interstitial" type="Button" parent="MarginContainer/VBoxContainer/Ads"]
+margin_left = 762.0
+margin_right = 1014.0
+margin_bottom = 318.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Interstitial"
+
+[node name="AdMob" type="Node" parent="MarginContainer/VBoxContainer/Ads"]
+script = ExtResource( 12 )
+is_real = true
+banner_id = "ca-app-pub-1712747660566158/2525673567"
+interstitial_id = "ca-app-pub-1712747660566158/8888219160"
+rewarded_id = "ca-app-pub-1712747660566158/2459059104"
+max_ad_content_rate = "T"
 [connection signal="swiped" from="SwipeDetector" to="." method="_on_SwipeDetector_swiped"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Buttons/ColorRect/TextureRect/VBoxContainer/InfoBtn" to="." method="_on_InfoBtn_pressed"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/HBoxContainer/Buttons/ColorRect/TextureRect/VBoxContainer/AudioBtn" to="." method="_on_AudioBtn_toggled"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/HBoxContainer/Buttons/ColorRect/TextureRect/VBoxContainer/PauseBtn" to="." method="_on_PauseBtn_toggled"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Buttons/ColorRect/TextureRect/VBoxContainer/RestartBtn" to="." method="_on_RestartBtn_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Ads/Reload" to="MarginContainer/VBoxContainer/Ads" method="_on_Reload_pressed"]
+[connection signal="resized" from="MarginContainer/VBoxContainer/Ads/Banner" to="MarginContainer/VBoxContainer/Ads" method="_on_Banner_resized"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/Ads/Banner" to="MarginContainer/VBoxContainer/Ads" method="_on_Banner_toggled"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Ads/Interstitial" to="MarginContainer/VBoxContainer/Ads" method="_on_Interstitial_pressed"]
+[connection signal="banner_failed_to_load" from="MarginContainer/VBoxContainer/Ads/AdMob" to="MarginContainer/VBoxContainer/Ads" method="_on_AdMob_banner_failed_to_load"]
+[connection signal="banner_loaded" from="MarginContainer/VBoxContainer/Ads/AdMob" to="MarginContainer/VBoxContainer/Ads" method="_on_AdMob_banner_loaded"]
+[connection signal="interstitial_closed" from="MarginContainer/VBoxContainer/Ads/AdMob" to="MarginContainer/VBoxContainer/Ads" method="_on_AdMob_interstitial_closed"]
+[connection signal="interstitial_failed_to_load" from="MarginContainer/VBoxContainer/Ads/AdMob" to="MarginContainer/VBoxContainer/Ads" method="_on_AdMob_interstitial_failed_to_load"]
+[connection signal="interstitial_loaded" from="MarginContainer/VBoxContainer/Ads/AdMob" to="MarginContainer/VBoxContainer/Ads" method="_on_AdMob_interstitial_loaded"]

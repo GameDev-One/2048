@@ -1,0 +1,4 @@
+#Thu Oct 22 12:34:06 PDT 2020
+base.0=/home/devone/Documents/Godot Projects/GDScript/2048/android/build/build/intermediates/dex/debug/mergeDexDebug/out/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
